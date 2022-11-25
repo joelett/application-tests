@@ -15,8 +15,10 @@ const connectconfig = {
 function runQuery(query,inputs=[]) {
     return sql.connect(connectconfig).then((pool) => {
       let req = pool.request()
-      for(let i=0;i<inputs.length;i++){
-        req.input(inputs[i].name,inputs[i].value)
+      console.log(inputs)
+      for(let key in inputs){
+        console.log(key+" "+inputs[key])
+        req.input(key,inputs[key])
       }
       return req.query(query)
     })

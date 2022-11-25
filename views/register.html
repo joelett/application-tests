@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Projectname - Registration</title>
+        <script src="/javascripts/clientmanager.js"></script>
+        <script src="/javascripts/crypto.js"></script>
+    </head>
+    <body>
+        <h1>Projectname</h1>
+        <h2>Register</h2>
+        <form id="registerform" action="">
+            <select name="foa" id="foa">
+                <option value="Herr">Herr</option>
+                <option value="Frau">Frau</option>
+                <option value="Divers">Divers</option>
+                <option value="andere">Etwas anderes</option>
+                <option value="nicht nennen">Möchte ich nicht nennen</option>
+            </select>
+            <input id="foa-andere" type="text" name="foa-andere" hidden>
+            <br>
+            <br>
+            <select name="type" id="usertype">
+                <option value="Citizen">Bürger</option>
+                <option value="Company">Gewerbe</option>
+                <option value="HousingAssociation">Wohnungsbaugesellschaft</option>
+                <option value="Proprietor">Eigentümer</option>
+            </select>
+            <br>
+            <br>
+            <input id="companyinput" placeholder="MaxMustermann GmbH" type="text" name="company">
+            <br>
+            <br>
+            <input id="nameinput" placeholder="Name" type="text" name="name" required>
+            <input id="surnameinput" placeholder="Surname" type="text" name="surname" required>
+            <br>
+            <br>
+            <input id="emailinput" placeholder="Email" type="email" name="email" required>
+            <br>
+            <br>
+            <input id="passinput" placeholder="Password" type="password" name="pass" required>
+            <br>
+            <br>
+            <input id="passinput2" placeholder="Repeat Password" type="password" name="pass2" required>
+            <br>
+            <br>
+            <input id="loginbtn" type="submit" value="submit">
+        </form>
+        <script src="/javascripts/register.js"></script>
+    </body>
+</html>

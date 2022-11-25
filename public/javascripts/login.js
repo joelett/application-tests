@@ -1,4 +1,4 @@
 document.getElementById("loginform").addEventListener("submit",(event)=>{
     event.preventDefault();
-    login(event.target.user.value,event.target.pass.value);
+    login(event.target.email.value,event.target.pass.value);
 })

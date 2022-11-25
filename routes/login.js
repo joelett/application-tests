@@ -8,10 +8,10 @@ router.get('/', (req, res, next)=>{
   res.render("login.html")
 });
 router.post('/',async (req,res)=>{
-  let uid = (await crypto.decryptData(req.body.uid))
+  let email = (await crypto.decryptData(req.body.email))
   let pass = (await crypto.decryptData(req.body.pass))
   
-  let ret = await verification.testUserData(uid,pass)
+  let ret = await verification.testUserData(email,pass)
   if(ret.sid!=null){
     res.cookie("kpo.sid",ret.sid)
   }
