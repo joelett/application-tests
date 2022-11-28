@@ -4,17 +4,17 @@
         <title>Projectname - Registration</title>
         <script src="/javascripts/clientmanager.js"></script>
         <script src="/javascripts/crypto.js"></script>
+        <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <h1>Projectname</h1>
+        <div class="login-form-wrapper">
         <h2>Register</h2>
         <form id="registerform" action="">
             <select name="foa" id="foa">
                 <option value="Herr">Herr</option>
                 <option value="Frau">Frau</option>
-                <option value="Divers">Divers</option>
-                <option value="andere">Etwas anderes</option>
-                <option value="nicht nennen">Möchte ich nicht nennen</option>
+                <option value="/">Nicht angeben</option>
             </select>
             <input id="foa-andere" type="text" name="foa-andere" hidden>
             <br>
@@ -46,5 +46,6 @@
             <input id="loginbtn" type="submit" value="submit">
         </form>
         <script src="/javascripts/register.js"></script>
+        </div>
     </body>
 </html>

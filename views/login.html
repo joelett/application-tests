@@ -4,19 +4,22 @@
         <title>Projectname - Login</title>
         <script src="/javascripts/clientmanager.js"></script>
         <script src="/javascripts/crypto.js"></script>
+        <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <h1>Projectname</h1>
-        <h2>Login</h2>
-        <form id="loginform" action="">
-            <input id="emailinput" placeholder="Email" type="email" name="email" required>
-            <br>
-            <br>
-            <input id="passinput" placeholder="Password" type="password" name="pass" required>
-            <br>
-            <br>
-            <input id="loginbtn" type="submit" value="submit">
-        </form>
-        <script src="/javascripts/login.js"></script>
+        <div class="login-form-wrapper">
+            <h2>Login</h2>
+            <form id="loginform" action="">
+                <input id="emailinput" placeholder="Email" type="email" name="email" required>
+                <br>
+                <br>
+                <input id="passinput" placeholder="Password" type="password" name="pass" required>
+                <br>
+                <br>
+                <input id="loginbtn" type="submit" value="submit">
+            </form>
+            <script src="/javascripts/login.js"></script>
+        </div>
     </body>
 </html>

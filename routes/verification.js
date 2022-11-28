@@ -11,12 +11,21 @@ function testUserData(email,pass){
     })
 }
 
+/*
+IF Boolean_expression   
+     { sql_statement | statement_block }   
+[ ELSE   
+     { sql_statement | statement_block } ] 
+*/
+
 function insertUserData(name,surname,foa,email,pass,type,company){
   let salt = crypto.genHash(32)
   let sid = crypto.genHash(32)
-  runQuery(`INSERT INTO KPO_USER 
-  (NAME,SURNAME,SALT,PASS,SID,EMAIL,ANREDE,TYP,FIRMA)
-  VALUES (@name,@surname,@salt,@pass,@sid,@email,@foa,@type,@company)
+  runQuery(`
+  IF NOT EXISTS(SELECT EMAIL FROM dbo.KPO_USER WHERE email=@email) 
+    INSERT INTO KPO_USER (NAME,SURNAME,SALT,PASS,SID,EMAIL,ANREDE,TYP,FIRMA) VALUES (@name,@surname,@salt,@pass,@sid,@email,@foa,@type,@company)
+  ELSE
+    SELECT 1 as 'duplicate'
   `,{name,surname,foa,email,pass:(crypto.hash(salt+pass)),salt,sid,type,company}).then(queryresult=>{
     console.log(queryresult)
   })

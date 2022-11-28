@@ -46,23 +46,24 @@ function register(uname,usurname,ufoa,utype,ucompany,uemail,upass){
             })
         }).then(async(resp)=>{
             console.log("["+resp.status+"] "+await resp.text())
-            fetch(pathext+"/register/activate",{
-                method:"POST",
-                headers:{"content-type":"application/json"},
-                body:JSON.stringify({
-                    email
-                })
-            })
         })
     })
 }
-/*
-let name = (await crypto.decryptData(req.body.name))
-let surname = (await crypto.decryptData(req.body.surname))
-let foa = (await crypto.decryptData(req.body.foa))
-let email = (await crypto.decryptData(req.body.email))
-let pass = (await crypto.decryptData(req.body.pass))
 
-let type = (await crypto.decryptData(req.body.type))
-let company = (await crypto.decryptData(req.body.company))
-*/
+function activate(uemail){
+    fetch(pathext+"/pubkey").then(raw=>{
+        return raw.json()
+    }).then(async data=>{
+        let pub = data.pubkey
+        let email = await encryptData(uemail,pub)
+        fetch(pathext+"/register/activate",{
+            method:"POST",
+            headers:{"content-type":"application/json"},
+            body:JSON.stringify({
+                email
+            })
+        }).then(async(resp)=>{
+            console.log("["+resp.status+"] "+await resp.text())
+        })
+    })
+}
