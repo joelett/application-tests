@@ -6,7 +6,11 @@ let verification = require("./verification.js")
 
 /* GET home page. */
 router.get('/', (req, res, next)=>{
-  res.render("register.html")
+  if(req.cookies['kpo.sid']==undefined||req.cookies['kpo.sid']==null){
+    res.render("register.html")
+  }else{
+    res.redirect("/ais/kundenportal/")
+  }
 });
 router.post('/',async (req,res)=>{
   let name = (await crypto.decryptData(req.body.name))

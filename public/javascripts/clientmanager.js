@@ -15,7 +15,12 @@ function login(email,pass){
                 email:mail,
                 pass:password
             })
-        }).then(async(resp)=>{console.log("["+resp.status+"] "+await resp.text())})
+        }).then(async(resp)=>{
+            console.log("["+resp.status+"] "+await resp.text())
+            if(resp.status==200){
+                location.href=pathext
+            }
+        })
     })
 }
 
