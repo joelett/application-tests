@@ -42,17 +42,15 @@ function checktmpban(req,res,next){
     }else{
         count[id].count=0
     }
-    //console.log(req.fingerprint,ip)
-    //console.log(count)
     if(count[id].lt+60000>Date.now()&&count[id].count>100){
         tmpbanned.push(id)
-    }else if(count[id].lt+60000<Date.now()){
+    }else if((count[id].lt+60000-Date.now())<0){
         tmpbanned.splice(tmpbanned.indexOf(id),1)
     }
-    console.log()
+    console.log((count[id].lt+60000-Date.now()))
 
     if(!tmpbanned.includes(id)){
-        next(count[id].lt+60000,Date.now())
+        next()
     }else{
         res.status(429).send("Too Many Requests")
     }
