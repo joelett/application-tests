@@ -49,9 +49,10 @@ function checktmpban(req,res,next){
     }else if(count[id].lt+60000<Date.now()){
         tmpbanned.splice(tmpbanned.indexOf(id),1)
     }
+    console.log()
 
     if(!tmpbanned.includes(id)){
-        next()
+        next(count[id].lt+60000,Date.now())
     }else{
         res.status(429).send("Too Many Requests")
     }
