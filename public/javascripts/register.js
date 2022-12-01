@@ -6,6 +6,7 @@ document.getElementById("registerform").addEventListener("submit",(event)=>{
         event.target.foa.value,
         event.target.type.value,
         event.target.company.value,
+        event.target.mobil.value,
         event.target.email.value,
         event.target.pass.value
     );

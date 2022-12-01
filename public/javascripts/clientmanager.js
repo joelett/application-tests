@@ -24,7 +24,7 @@ function login(email,pass){
     })
 }
 
-function register(uname,usurname,ufoa,utype,ucompany,uemail,upass){
+function register(uname,usurname,ufoa,utype,ucompany,umobil,uemail,upass){
     fetch(pathext+"/pubkey").then(raw=>{
         return raw.json()
     }).then(async data=>{
@@ -34,6 +34,7 @@ function register(uname,usurname,ufoa,utype,ucompany,uemail,upass){
         let foa = await encryptData(ufoa,pub)
         let type = await encryptData(utype,pub)
         let company = await encryptData(ucompany,pub)
+        let mobil = await encryptData(umobil,pub)
         let email = await encryptData(uemail,pub)
         let pass = await encryptData(upass,pub)
 
@@ -46,6 +47,7 @@ function register(uname,usurname,ufoa,utype,ucompany,uemail,upass){
                 foa,
                 type,
                 company,
+                mobil,
                 email,
                 pass
             })

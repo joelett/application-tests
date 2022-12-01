@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-let crypto = require("./crypto.js")
-let verification = require("./verification.js")
+let crypto = require("../crypto.js")
+let verification = require("../verification.js")
 
 router.get('/', (req, res, next)=>{
   if(req.cookies['kpo.sid']==undefined||req.cookies['kpo.sid']==null){

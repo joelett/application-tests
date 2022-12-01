@@ -1,8 +1,8 @@
 var express = require('express');
 const { MSSQLError } = require('mssql');
 var router = express.Router();
-let crypto = require("./crypto.js")
-let verification = require("./verification.js")
+let crypto = require("../crypto.js")
+let verification = require("../verification.js")
 
 /* GET home page. */
 router.get('/', (req, res, next)=>{
@@ -21,9 +21,10 @@ router.post('/',async (req,res)=>{
 
   let type = (await crypto.decryptData(req.body.type))
   let company = (await crypto.decryptData(req.body.company))
+  let mobil = (await crypto.decryptData(req.body.mobil))
   
   //let ret = await verification.insertUserData(name,surname,foa,email,pass,type,company)
-  verification.insertUserData(name,surname,foa,email,pass,type,company)
+  verification.insertUserData(name,surname,foa,email,pass,type,company,mobil)
 
   //if(ret.sid!=null){
   //  res.cookie("kpo.sid",ret.sid)

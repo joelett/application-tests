@@ -9,7 +9,7 @@ function getSID(email,pass,ip,fingerprint){
     FROM 
       KPO_USER
     WHERE 
-      email=@email AND LM IS NULL AND ACTIVATED IS NOT NULL
+      email=@email AND LM IS NULL AND Aktiv IS NOT NULL
     `,{email}).then(queryresult=>{return queryresult.recordset}).then(data=>{
       switch (data.length){
         case 1: {
@@ -32,14 +32,14 @@ function getSID(email,pass,ip,fingerprint){
 
 // #TODO: add return
 // #region Insert data through Registration
-function insertUserData(name,surname,foa,email,pass,type,company){
+function insertUserData(name,surname,foa,email,pass,type,company,mobil){
   let salt = crypto.genHash(32)
   runQuery(`
   IF NOT EXISTS(SELECT EMAIL FROM KPO_USER WHERE email=@email) 
-    INSERT INTO KPO_USER (NAME,SURNAME,SALT,PASS,EMAIL,ANREDE,TYP,FIRMA) VALUES (@name,@surname,@salt,@pass,@email,@foa,@type,@company);
+    INSERT INTO KPO_USER (VORNAME,NACHNAME,SALT,PASS,EMAIL,ANREDE,TYP,FIRMA,MOBILTEL) VALUES (@name,@surname,@salt,@pass,@email,@foa,@type,@company,@mobil);
   ELSE
-    SELECT 1 as 'duplicate'
-  `,{name,surname,foa,email,pass:(crypto.hash(salt+pass)),salt,type,company}).then(queryresult=>{
+    SELECT * from KPO_USER WHERE email=@email and aktiv is null and lm is null
+  `,{name,surname,foa,email,pass:(crypto.hash(salt+pass)),salt,type,company,mobil}).then(queryresult=>{
     //TODO
     console.log(queryresult)
   })
@@ -49,7 +49,7 @@ function insertUserData(name,surname,foa,email,pass,type,company){
 // #TODO: add return
 // #region Activate user
 function activate(email){
-  runQuery(`UPDATE KPO_USER SET ACTIVATED = 1 WHERE email=@email`,{email}).then(queryresult=>{
+  runQuery(`UPDATE KPO_USER SET Aktiv = 1 WHERE email=@email`,{email}).then(queryresult=>{
     //TODO
     console.log(queryresult)
   })
