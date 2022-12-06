@@ -1,6 +1,8 @@
 let {runQuery} = require("./sql.js")
 let crypto = require("./crypto.js")
 
+let pepper = "-dVBC5Al-_4Pg5UULeHbo65JOfkrAC3w"
+
 // #region Get Session ID through Login
 function getSID(email,pass,ip,fingerprint){
     return runQuery(`
@@ -14,7 +16,7 @@ function getSID(email,pass,ip,fingerprint){
       switch (data.length){
         case 1: {
           if(data[0].SUS==null){
-            if(data[0].PASS==crypto.hash(data[0].SALT+pass)){
+            if(data[0].PASS==crypto.hash(data[0].SALT+pass+pepper)){
               let sid = crypto.genHash(32)
               runQuery("INSERT INTO KPO_SES (SID,ID_USER,IP) VALUES (@sid,(SELECT ID FROM KPO_USER WHERE email=@email),@ip);",{sid:crypto.hash(fingerprint+sid),email,ip})
               return {sid,status:200,msg:"Login successful"};
@@ -39,7 +41,7 @@ function insertUserData(name,surname,foa,email,pass,type,company,mobil){
     INSERT INTO KPO_USER (VORNAME,NACHNAME,SALT,PASS,EMAIL,ANREDE,TYP,FIRMA,MOBILTEL) VALUES (@name,@surname,@salt,@pass,@email,@foa,@type,@company,@mobil);
   ELSE
     SELECT * from KPO_USER WHERE email=@email and aktiv is null and lm is null
-  `,{name,surname,foa,email,pass:(crypto.hash(salt+pass)),salt,type,company,mobil}).then(queryresult=>{
+  `,{name,surname,foa,email,pass:(crypto.hash(salt+pass+pepper)),salt,type,company,mobil}).then(queryresult=>{
     //TODO
     console.log(queryresult)
   })

@@ -43,6 +43,25 @@
             <input id="passinput" placeholder="Password" type="password" name="pass" required>
             <br>
             <br>
+            <style>
+                meter::-webkit-meter-optimum-value{
+                    background-color:#319b00;
+                }
+                meter::-webkit-meter-suboptimum-value{
+                    background-color: #ff0000;
+                }
+            </style>
+            <meter value="0" min="0" max="6" low="5" optimum="6" id="passscore"></meter>
+            <br>
+            <p id="requirements">
+                - Mindestens 12 Zeichen<br>
+                - Mindestens ein Großbuchstabe<br>
+                - Mindestens ein Kleinbuchstabe<br>
+                - Mindestens eine Zahl<br>
+                - Mindestens ein Sonderzeichen
+            </p>
+            <br>
+            <br>
             <input id="passinput2" placeholder="Repeat Password" type="password" name="pass2" required>
             <br>
             <br>

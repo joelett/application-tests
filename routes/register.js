@@ -6,7 +6,7 @@ let verification = require("../verification.js")
 
 /* GET home page. */
 router.get('/', (req, res, next)=>{
-  if(req.cookies['kpo.sid']==undefined||req.cookies['kpo.sid']==null){
+  if(req.session==undefined||req.session==null){
     res.render("register.html")
   }else{
     res.redirect("/ais/kundenportal/")
@@ -27,7 +27,7 @@ router.post('/',async (req,res)=>{
   verification.insertUserData(name,surname,foa,email,pass,type,company,mobil)
 
   //if(ret.sid!=null){
-  //  res.cookie("kpo.sid",ret.sid)
+  //  res.cookie("USBKundenportal.sid",ret.sid)
   //}
   //res.status(ret.status).send(ret.msg)
   res.status(200).send("Testing")

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   if(ret.uid!=null){
     res.render('index.html');
   }else{
-    res.cookie("kpo.sid","",{
+    res.cookie("USBKundenportal.sid","",{
       maxAge:0
     })
     res.status(ret.response.status).redirect("/ais/kundenportal/login")
@@ -23,7 +23,7 @@ router.get('/pubkey',async(req,res)=>{
 router.get('/valid',async (req,res)=>{
   let ret = req.session
   if(ret.uid==null){
-    res.cookie("kpo.sid","",{
+    res.cookie("USBKundenportal.sid","",{
       maxAge:0
     })
   }
@@ -31,7 +31,7 @@ router.get('/valid',async (req,res)=>{
 })
 
 router.get('/logout',(req,res)=>{
-  res.cookie("kpo.sid","",{
+  res.cookie("USBKundenportal.sid","",{
     maxAge:0
   })
   res.redirect("/ais/kundenportal/login")

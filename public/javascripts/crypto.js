@@ -57,11 +57,16 @@ function str2ab(str) {
 
 function genRand(length,charset) {
     var result           = '';
-    //var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-    var charactersLength = charset.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += charset.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
+    var charactersLength = characters.length;
+    let indexer = crypto.getRandomValues(new Uint8Array(length))
+    let rand = crypto.getRandomValues(new Uint8Array(256))
+    
+    for(let i=0;i<indexer.length;i++){
+        result+=charset.charAt(Math.floor(rand[indexer[i]]/256*charactersLength))
+    }
    return result;
+}
+
+function hash(input){
+    return window.crypto.subtle.digest('SHA-256',str2ab(input)).then((el)=>{return ab2str(el)}).then((el)=>{return window.btoa(el)})
 }

@@ -83,11 +83,13 @@ function genHash(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
+    let indexer = crypto.getRandomValues(new Uint8Array(length))
+    let rand = crypto.getRandomValues(new Uint8Array(256))
+
+    for(let i=0;i<indexer.length;i++){
+        result+=characters.charAt(Math.floor(rand[indexer[i]]/256*charactersLength))
+    }
+    return result;
 }
 
 
