@@ -6,7 +6,7 @@ function login(email,pass){
     }).then(async data=>{
         let pub = data.pubkey
         let mail = await encryptData(email,pub)
-        let password = await encryptData(await hash(pass+mail),pub)
+        let password = await encryptData(await hash(pass+email),pub)
 
         fetch(pathext+"/login",{
             method:"POST",
@@ -36,7 +36,7 @@ function register(uname,usurname,ufoa,utype,ucompany,umobil,uemail,upass){
         let company = await encryptData(ucompany,pub)
         let mobil = await encryptData(umobil,pub)
         let email = await encryptData(uemail,pub)
-        let pass = await encryptData(await hash(upass+email),pub)
+        let pass = await encryptData(await hash(upass+uemail),pub)
 
         fetch(pathext+"/register",{
             method:"POST",

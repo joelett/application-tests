@@ -12,7 +12,7 @@ document.getElementById("registerform").addEventListener("submit",(event)=>{
             event.target.pass.value
         );
     }else{
-        console.log("PASSWORD NOT VALID")
+        console.log("PASSWORD INVALID")
         //TODO
     }
 })
@@ -23,13 +23,14 @@ document.getElementById("passinput").addEventListener("keyup",(ev)=>{
 })
 
 function calculateScore(input){
-    let score = 0
+    let special=/(?=.*?[^\w\s])/.test(input)//?33:0
+    let numbers=/(?=.*?[0-9])/.test(input)//?10:0
+    let capital=/(?=.*?[A-Z])/.test(input)//?26:0
+    let lowercase=/(?=.*?[a-z])/.test(input)//?26:0
 
-    score+=/(?=.*?[^\w\s])/.test(input)?1:0
-    score+=/(?=.*?[0-9])/.test(input)?1:0
-    score+=/(?=.*?[A-Z])/.test(input)?1:0
-    score+=/(?=.*?[a-z])/.test(input)?1:0
-    score+=input.length>=12?(score>=4?(sigmoid(input.length-12)*2):1):0
+    let set = (special?33:0)+(numbers?10:0)+(capital?26:0)+(lowercase?26:0)
+
+    let score = Math.log2(Math.pow(set,set==95?input.length:(input.length>=12?12:input.length)))
 
     return Math.round(score)
 }
